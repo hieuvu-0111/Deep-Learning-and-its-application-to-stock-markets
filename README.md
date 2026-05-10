@@ -1,5 +1,7 @@
 # Deep Learning and Its Application to Stock Markets
+
 This project explores application of Deep Learning into financial datasets, including stock price prediction, trading signal identification, risk/return management, and portfolio construction. 
+
 ---
 ## Project Structure
 ```
@@ -61,14 +63,14 @@ pip install -r requirements.txt
 ---
 ## Data
  
-The project uses two datasets with the last update on December 2022.
+The project uses two datasets to train all models in the notebook. Task 1 uses nasdaq dataset, and task 2, 3 and 4 use hose dataset. 
  
 **Nasdaq dataset**
 - Format: one CSV per ticker, columns - `Date, Low, Open, Volume, High, Close, Adjusted Close`
 - Place files in: `data/nasdaq/`
 **Vietnam HOSE dataset**
 - Format: one CSV per ticker, named `{TICKER}-VNINDEX-History.csv`
-- Additional files: `{TICKER}-VNINDEX-Dividend.csv`, `ticker-overview.csv`
+- Additional files: `{TICKER}-VNINDEX-Dividend.csv`, `{TICKER}-VNINDEX-Industry.csv`, `{TICKER}-VNINDEX-Finance.csv`,  `ticker-overview.csv`
 - Place files in: `data/hose/`
 In the notebook, update the `NASDAQ_DATA_DIR` and `HOSE_DATA_DIR` variables at the top of each notebook to point to your local data folders.
  
@@ -93,7 +95,7 @@ The API will be available at:
 
 To submit a price prediction request directly to the API, post a JSON body containing
 a ticker string and an instances array of 30 rows, each with five values in the order
-`[Open, High, Low, Close, Volume]`. Below is one example:
+`[Open, High, Low, Close, Volume]`. Below is an example:
  
 ```
 {
@@ -132,7 +134,7 @@ a ticker string and an instances array of 30 rows, each with five values in the 
   ]
 }
 ```
-Note that the realistic financial data should be inputted to ouput meaningful information.
+Note that the realistic financial data should be used to ouput meaningful information.
 
 **Sample response**:
  
@@ -184,6 +186,7 @@ The Airflow DAG runs daily at 18:00 on weekdays, after market close.
 ## Limitations
  
 - Buy/sell signal thresholds are calibrated and optimized for HPG only
+- Deployment was only on price forecasting model
 - Cross-validation produces two folds due to dataset size constraints
 - The historical prices were only updated to 2022. It implicitly assumes that the historical return distribution of the 2019-2022 test period is representative of the near future.
 ---
